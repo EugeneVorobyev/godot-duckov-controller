@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3qxvv8cnwgxo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7u77a"]
+albedo_color = Color(1.3957917e-06, 0.3974248, 0.13629475, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7u77a"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="Ground" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(159.46626, 0, 0, 0, 0.109848976, 0, 0, 0, 159.46626, 0, -0.03935182, 0)
+material = SubResource("StandardMaterial3D_7u77a")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 0.54976654, 0.8353183, 0, -0.8353183, 0.54976654, 0, 9.144337, 0)
+
+[node name="Camera" type="Node" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 6.3633084, 6.2560425)
+
+[node name="Player" type="CharacterBody3D" parent="."]
+
+[node name="Body" type="CSGCylinder3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.020128, 0)
+sides = 16
+
+[node name="Beak" type="CSGBox3D" parent="Player"]
+transform = Transform3D(0.55359936, 0, 0, 0, 0.33874202, 0, 0, 0, 1, 0, 1.4096835, 0.4703126)
+
+[node name="Collision" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1.53, 0, 0, 0, 1.53, 0, 0, 0, 1.53, 0, 0.95863795, 0)
+shape = SubResource("CapsuleShape3D_7u77a")
