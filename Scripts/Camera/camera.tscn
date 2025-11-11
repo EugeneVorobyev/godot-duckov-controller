@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://mmnrm4wv6kkk"]
+
+[ext_resource type="Script" uid="uid://hhc3nta6b7i6" path="res://Scripts/Camera/camera_rig.gd" id="1_yytf5"]
+[ext_resource type="Script" uid="uid://bp4kdot2gu3qu" path="res://Scripts/Camera/camera_debug.gd" id="2_0fqex"]
+[ext_resource type="Script" uid="uid://cmry6e5rx3tk4" path="res://Scripts/Camera/camera_utils.gd" id="3_we5x8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jjvhh"]
+albedo_color = Color(0.8493206, 0, 0.10647873, 1)
+
+[node name="CameraRig" type="Node3D"]
+top_level = true
+script = ExtResource("1_yytf5")
+enabled = true
+enable_cursor_shift = true
+
+[node name="OffsetRig" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="OffsetRig"]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 20.006475, 11.432955)
+fov = 60.0
+size = 15.0
+far = 500.0
+
+[node name="OffsetRigDebug" type="CSGCylinder3D" parent="OffsetRig"]
+transform = Transform3D(1, 0, 0, 0, 0.090245426, 0, 0, 0, 1, 0, 0.021585464, 0)
+sides = 16
+material = SubResource("StandardMaterial3D_jjvhh")
+
+[node name="CameraDebug" type="Node2D" parent="."]
+script = ExtResource("2_0fqex")
+
+[node name="CameraUtils" type="Node" parent="."]
+script = ExtResource("3_we5x8")

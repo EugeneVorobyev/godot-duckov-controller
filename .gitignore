@@ -1,16 +1,73 @@
-# Godot 4+ specific ignores
+#################################
+# Godot 4.x
+#################################
+
+# Godot editor/cache folder (should never be committed)
 .godot/
-.nomedia
 
-# Godot-specific ignores
+# Import cache (auto-generated from source assets)
 .import/
-export.cfg
-export_credentials.cfg
 
-# Imported translations (automatically generated from CSV files)
-*.translation
+# Generated import artifacts
+*.import
+*.oggstr
+*.pngstr
 
-# Mono-specific ignores
+# Temporary scene/resource files
+*.tmp
+*.tmp.*
+*.tscn.tmp
+*.scn.tmp
+*.res.tmp
+*.tres.tmp
+*.import.tmp
+
+# Godot export output (if you export builds into folders)
+export/
+exports/
+build/
+_bin/
+*.exe
+*.x86*
+*.x86_64
+*.wasm
+*.wasm64
+*.apk
+*.aab
+*.app
+*.pck
+*.zip
+*.pck.tmp
+
+#################################
+# Mono / C# (if using Godot .NET)
+#################################
 .mono/
 data_*/
-mono_crash.*.json
+mono_crash.*
+
+#################################
+# IDE/editor files
+#################################
+.vscode/
+.vs/
+.idea/
+*.sln
+*.csproj
+*.user
+*.csproj.user
+
+#################################
+# Logs & cache
+#################################
+logs/
+*.log
+.cache/
+*.converted.*
+
+#################################
+# OS junk
+#################################
+.DS_Store
+Thumbs.db
+desktop.ini

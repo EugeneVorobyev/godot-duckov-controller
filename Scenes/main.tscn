@@ -1,4 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3qxvv8cnwgxo"]
+[gd_scene load_steps=5 format=3 uid="uid://b3qxvv8cnwgxo"]
+
+[ext_resource type="PackedScene" uid="uid://mmnrm4wv6kkk" path="res://Scripts/Camera/camera.tscn" id="2_bo1nx"]
+[ext_resource type="Script" uid="uid://ifo3cnqiqti7" path="res://Scripts/Player/player.gd" id="4_jjvhh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7u77a"]
 albedo_color = Color(1.3957917e-06, 0.3974248, 0.13629475, 1)
@@ -16,20 +19,31 @@ material = SubResource("StandardMaterial3D_7u77a")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 0.54976654, 0.8353183, 0, -0.8353183, 0.54976654, 0, 9.144337, 0)
 
-[node name="Camera" type="Node" parent="."]
+[node name="Column" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.107869, 1.9654582, 10.945772)
+size = Vector3(2, 4, 2)
 
-[node name="Camera3D" type="Camera3D" parent="Camera"]
-transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 6.3633084, 6.2560425)
+[node name="Column2" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1530323, 1.9654582, -13.636396)
+size = Vector3(2, 4, 2)
+
+[node name="Column3" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.500141, 1.9654582, 5.3566685)
+size = Vector3(2, 4, 2)
 
 [node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("4_jjvhh")
 
 [node name="Body" type="CSGCylinder3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.020128, 0)
 sides = 16
 
 [node name="Beak" type="CSGBox3D" parent="Player"]
-transform = Transform3D(0.55359936, 0, 0, 0, 0.33874202, 0, 0, 0, 1, 0, 1.4096835, 0.4703126)
+transform = Transform3D(0.55359936, 0, 0, 0, 0.33874202, 0, 0, 0, 1, 0, 1.4096835, -0.41314787)
 
 [node name="Collision" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1.53, 0, 0, 0, 1.53, 0, 0, 0, 1.53, 0, 0.95863795, 0)
 shape = SubResource("CapsuleShape3D_7u77a")
+
+[node name="CameraRig" parent="Player" node_paths=PackedStringArray("player") instance=ExtResource("2_bo1nx")]
+player = NodePath("..")
