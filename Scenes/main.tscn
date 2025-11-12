@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3qxvv8cnwgxo"]
+[gd_scene load_steps=7 format=3 uid="uid://b3qxvv8cnwgxo"]
 
 [ext_resource type="PackedScene" uid="uid://mmnrm4wv6kkk" path="res://Scripts/Camera/camera.tscn" id="2_bo1nx"]
+[ext_resource type="Script" uid="uid://dg7jfagk4khvv" path="res://Scripts/Player/Aim/mouse_tracker.gd" id="3_8gbba"]
 [ext_resource type="Script" uid="uid://ifo3cnqiqti7" path="res://Scripts/Player/player.gd" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://bcivqbse58fvg" path="res://Scripts/UI/aim_distance.gd" id="4_kry3j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7u77a"]
 albedo_color = Color(1.3957917e-06, 0.3974248, 0.13629475, 1)
@@ -47,3 +49,27 @@ shape = SubResource("CapsuleShape3D_7u77a")
 
 [node name="CameraRig" parent="Player" node_paths=PackedStringArray("player") instance=ExtResource("2_bo1nx")]
 player = NodePath("..")
+
+[node name="MouseTracker" type="Node3D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("3_8gbba")
+player = NodePath("../Player")
+metadata/_custom_type_script = "uid://dg7jfagk4khvv"
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="AimDistance" type="Label" parent="HUD"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -116.0
+offset_top = -88.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.87717366, 0.7684531, 3.85046e-07, 1)
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+script = ExtResource("4_kry3j")
+
+[connection signal="distance_changed" from="MouseTracker" to="HUD/AimDistance" method="_on_mouse_tracker_distance_changed"]

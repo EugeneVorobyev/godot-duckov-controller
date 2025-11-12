@@ -28,20 +28,9 @@ func _handle_rotation(delta: float) -> void:
 		printerr("Missing camera")
 		return
 	
-	var camera: Camera3D = camera_rig.camera
-	var viewport = get_viewport();
-	if not viewport:
-		printerr("Missing viewport")
-		return
-		
-	var mouse_pos = viewport.get_mouse_position()
-	var from = camera.project_ray_origin(mouse_pos)
-	var dir = camera.project_ray_normal(mouse_pos)
-	var plane = Plane(Vector3.UP, position.y)
-	var mouse_world_pos = plane.intersects_ray(from, dir)
-
-	if mouse_world_pos != null:
-		var target_dir = (position - mouse_world_pos).normalized()
+	var mouse_ground_pos = MouseManager.get_mouse_pos_at_node_level(self)
+	if mouse_ground_pos != null:
+		var target_dir = (position - mouse_ground_pos).normalized()
 		var target_rot_y = atan2(target_dir.x, target_dir.z)
 		var current_rot_y = rotation.y
 		rotation.y = lerp_angle(current_rot_y, target_rot_y, 1.0 - pow(0.001, delta * ease_speed))
